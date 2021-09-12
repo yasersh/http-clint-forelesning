@@ -1,20 +1,31 @@
 package no.kristiania.http;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class QueryString {
-    private final String parameterValue;
-    private final String parameterName;
+    private final Map<String,String> parameters = new HashMap<>();
+
+    private  String parameterValue;
+    private  String parameterName;
 
     public QueryString(String queryString) {
-        int equalPos= queryString.indexOf('=');
-        parameterName = queryString.substring(0,equalPos);
-        parameterValue= queryString.substring(equalPos+1);
+
+        for (String parameter : queryString.split("&")) {
+            int equalPos= parameter.indexOf('=');
+            parameterName = parameter.substring(0,equalPos);
+            parameterValue= parameter.substring(equalPos+1);
+            parameters.put(parameterName,parameterValue);
+        }
+
     }
 
-    public String getParameter(String status) {
-        if (status.equals(parameterName)){
+    public String getParameter(String parameterName) {
+        if (parameterName.equals(this.parameterName)){
         return parameterValue;
     }else {
-            return null;
+            return parameters.get(parameterName);
         }
     }
+
 }
