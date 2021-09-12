@@ -21,4 +21,10 @@ public class QueryStringTest {
         QueryString queryString = new QueryString("body=Hallo");
         assertNull(queryString.getParameter("status"));
     }
+    @Test
+    void shouldSupportMultiParameters(){
+        QueryString queryString = new QueryString("status=200&body=Hallo");
+        assertEquals("200",queryString.getParameter("status"));
+        assertEquals("Hallo",queryString.getParameter("body"));
+    }
 }
