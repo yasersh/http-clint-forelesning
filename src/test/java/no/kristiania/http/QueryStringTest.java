@@ -10,4 +10,9 @@ public class QueryStringTest {
         QueryString queryString = new QueryString("status=200");
         assertEquals ("200",queryString.getParameter("status"));
     }
+    @Test
+    void ShouldReserveStatusCode401(){
+        QueryString queryString = new QueryString("status=401");
+        assertEquals ("401",queryString.getParameter("status"));
+    }
 }
